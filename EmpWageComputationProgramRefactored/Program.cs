@@ -5,59 +5,48 @@ namespace EmpWageComputationProgramRefactored
     class EmpWageBuilder
     {
         //Constant
-        public const int IS_PRESENT = 1;
         public const int IS_FULL_TIME = 1;
         public const int IS_PART_TIME = 0;
-        public const int EMP_RATE_PER_HOUR = 20;
-        public const int NUM_OF_WORKING_DAYS = 20;
-        public const int MAX_NUM_OF_HOURS = 100;
-
-        //Class Variable
-        public static int totalEmpWage = 0;
-        public static int totalEmpHrs = 0;
-        public static int totalWorkingDays = 0;
-        public static int empHrs;
-        public static int empWage;
-
+        
         // Class Method
-        public static void CheckingWage()
+        public static void CalculateWage(string company, int EMP_RATE_PER_HOUR, int NUM_OF_WORKING_DAYS, int MAX_NUM_OF_HOURS, int empHrsFullTime, int empHrsPartTime)
         {
             Console.WriteLine("Welcome To Employee Wage Computation Program");
-            
+
+            //Variable
+            int totalEmpWage = 0;
+            int totalEmpHrs = 0;
+            int totalWorkingDays = 0;
+            int empHrs;
+            int empWage;
             Random rand = new Random();
-            int empCheck = rand.Next(0, 2);
-            if (empCheck == IS_PRESENT)
+
+            //Computation
+            while (totalEmpHrs <= MAX_NUM_OF_HOURS && totalWorkingDays <= NUM_OF_WORKING_DAYS)
             {
-                Console.WriteLine(" Employee is Present ");
-                while (totalEmpHrs <= MAX_NUM_OF_HOURS && totalWorkingDays <= NUM_OF_WORKING_DAYS)
+
+                totalEmpHrs++;
+                totalWorkingDays++;
+
+                int workingTime = rand.Next(0, 2);
+                switch (workingTime)
                 {
-                    totalEmpHrs++;
-                    totalWorkingDays++;
-                    int workingTime = rand.Next(0, 2);
-                    switch (workingTime)
-                    {
-                        case IS_FULL_TIME:
-                            empHrs = 8;
-                            break;
-                        case IS_PART_TIME:
-                            empHrs = 4;
-                            break;
-                        default:
-                            empHrs = 0;
-                            break;
-                    }
-                    empWage = empHrs * EMP_RATE_PER_HOUR;
-                    totalEmpWage += empWage;
-                    Console.WriteLine(" Emp Daily Wage: " + empWage);
+
+                    case IS_FULL_TIME:
+                        empHrs = 8;
+                        break;
+                    case IS_PART_TIME:
+                        empHrs = 4;
+                        break;
+                    default:
+                        empHrs = 0;
+                        break;
                 }
-                Console.WriteLine("Emp Total Wage: " + totalEmpWage);
-
+                empWage = empHrs * EMP_RATE_PER_HOUR;
+                totalEmpWage += empWage;
+                Console.WriteLine(" Emp Daily Wage: " + empWage);
             }
-
-            else
-            {
-                Console.WriteLine(" Employee is Absent ");
-            }
+            Console.WriteLine("Emp Total Wage of " + company+ " is: " + totalEmpWage + " Rs");
 
         }
     }
@@ -66,7 +55,10 @@ namespace EmpWageComputationProgramRefactored
     {
         static void Main(string[] args)
         {
-            EmpWageBuilder.CheckingWage();
+            EmpWageBuilder.CalculateWage("Audi", 20, 25, 100, 8, 4);
+            EmpWageBuilder.CalculateWage("BMW", 25, 20, 100, 9, 2);
+            EmpWageBuilder.CalculateWage("Ferrari", 30, 18, 90, 7, 4);
+
         }
     }
 }
