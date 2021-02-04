@@ -24,14 +24,12 @@ namespace EmpWageComputationProgramRefactored
             //Computation
             while (totalEmpHrs <= MAX_NUM_OF_HOURS && totalWorkingDays <= NUM_OF_WORKING_DAYS)
             {
-
                 totalEmpHrs++;
                 totalWorkingDays++;
 
                 int workingTime = rand.Next(0, 2);
                 switch (workingTime)
                 {
-
                     case IS_FULL_TIME:
                         empHrs = 8;
                         break;
