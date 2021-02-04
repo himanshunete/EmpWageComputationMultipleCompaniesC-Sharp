@@ -19,9 +19,6 @@ namespace EmpWageComputationProgramRefactored
         public static int empHrs;
         public static int empWage;
 
-        /// <summary>
-        /// 
-        /// </summary>
         // Class Method
         public static void CheckingWage()
         {
